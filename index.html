@@ -1,48 +1,30 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOP DONER Eindhoven</title>
-<style>
-body{margin:0;background:#000;color:#fff;font-family:Arial;text-align:center;padding:10px}
-.title{color:#ffcc00;font-size:14px;margin:10px}
-.box{background:#121212;padding:15px;border-radius:20px;margin:12px auto;max-width:700px;border:1.5px solid #c9a600}
-.phone{color:#ffcc00;font-size:28px;font-weight:bold;text-decoration:none}
-.btn{background:#25D366;color:#fff;padding:12px 25px;border-radius:30px;text-decoration:none;display:inline-block;font-weight:bold;margin:10px}
-.redbox{background:#d90000;padding:12px;border-radius:12px;margin:12px auto;max-width:700px;border:1.5px solid #ffcc00}
-.gold{color:#ffcc00}
-img.main{width:100%;border-radius:15px;border:2px solid #ffcc00;margin:10px 0}
-</style>
-</head>
-<body>
-
-<p class="title">Beste smaak van de stad - Eindhoven</p>
-
-<div class="box">
-<a class="phone" href="tel:0684592984">📞 0684592984</a>
-<p style="font-size:12px">📍 Eindhoven - Slechts 3x2 meter nodig</p>
-<a class="btn" href="https://wa.me/31684592984">Bestel via WhatsApp</a>
-</div>
-
-<div class="redbox">
-<h3 style="margin:0">⭐ FOTO OP SOCIAL MEDIA = 20% KORTING + GRATIS DRANKJE! ⭐</h3>
-</div>
-
-<!-- FOTO 1 - MAN -->
-<img class="main" src="https://i.postimg.cc/DSWgrMZ8/IMG-20261026-WA0013.jpg" style="max-width:700px;border-radius:15px;border:2px solid #ffcc00">
-
-<!-- FOTO 2 - MENU -->
-<div class="box">
-<h3 class="gold">Ons Menu</h3>
-<img class="main" src="https://i.postimg.cc/v41zrNBD/IMG-20261026-WA0014.jpg">
-</div>
-
-<!-- FOTO 3 - FOODTRUCK -->
-<div class="box">
-<h3 class="gold">TOP DONER Foodtruck</h3>
-<img class="main" src="https://i.postimg.cc/v41zrNBH/IMG-20261026-WA0015.jpg">
-</div>
-
-</body>
-</html>
+name: Deploy static content to Pages
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
