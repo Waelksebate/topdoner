@@ -1,30 +1,44 @@
-name: Deploy static content to Pages
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOP DÖNER - Best Taste In Town</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:Arial;text-align:center}
+.header{padding:15px;background:#000}
+.phone{font-size:32px;color:#ffcc00;font-weight:bold;text-decoration:none;display:block;margin:10px}
+.btn{padding:16px 30px;border-radius:50px;text-decoration:none;font-weight:bold;display:inline-block;margin:8px}
+.btn-green{background:#25D366;color:#fff}
+.btn-yellow{background:#ffcc00;color:#000}
+.korting{background:#ff0000;color:#fff;padding:14px;font-weight:bold;font-size:18px}
+.menu-img{width:100%;max-width:600px;height:auto;display:block;margin:0 auto;image-rendering:-webkit-optimize-contrast}
+.info-box{background:#111;padding:20px;max-width:600px;margin:0 auto;border-top:2px solid #ffcc00}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1 style="color:#ffcc00;font-size:42px">TOP DÖNER</h1>
+<p style="color:#ccc">BEST TASTE IN TOWN - Eindhoven</p>
+<a class="phone" href="tel:0684592984">📞 0684592984</a>
+<a class="btn btn-green" href="https://wa.me/31684592984">💬 Bestel via WhatsApp</a>
+<a class="btn btn-yellow" href="tel:0684592984">📞 Direct Bellen</a>
+</div>
+
+<div class="korting">⭐ FOTO OP TIKTOK/INSTA = 20% KORTING + GRATIS DRANKJE! ⭐</div>
+
+<!-- هاي الصورة يلي بعتها - رح نحطها بجودة عالية -->
+<img class="menu-img" src="menu.jpg" alt="TOP DONER MENU">
+
+<div class="info-box">
+<h3 style="color:#ffcc00">🚚 3x2 meter foodtruck!</h3>
+<p style="color:#ddd;margin:10px 0">Slechts 2 parkeerplaatsen nodig! Perfect voor elk evenement in Eindhoven</p>
+<p style="color:#aaa;font-size:14px">📍 Eindhoven | ✅ Halal | ✅ HACCP gecertificeerd</p>
+<br>
+<p style="color:#ffcc00;font-weight:bold">TOP DONER - Beste smaak van de stad!</p>
+</div>
+
+</body>
+</html>
